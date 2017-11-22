@@ -63,46 +63,50 @@
                         
             <div class="container">                                
                 <div class="row">
-                    <div class="col-lg-6 col-md-12 ml-auto mr-auto text-center">
+                    <div class="hideme container pb-5">
+                        <div id="map" style="background:black;width:100%;height:70vh;"></div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-12 mb-5 text-center ">
                         <img src="images/RT839.png" alt="" style="width:100%">
                     </div>
-                    <div class="col-lg-6 col-md-12 ml-auto mr-auto text-center">
+                    <div class="col-lg-6 col-md-12 mb-5 text-center ">
                         <img src="images/RT840.png" alt="" style="width:100%">
                     </div>
-                    <div class="col-lg-6 col-md-12 ml-auto mr-auto text-center">                        
+                    <div class="col-lg-6 col-md-12 mb-5 text-center ">                        
                         <img src="images/RT841.png" alt="" style="width:100%">
                     </div>
-                    <div class="col-lg-6 col-md-12 ml-auto mr-auto text-center">                        
+                    <div class="col-lg-6 col-md-12 mb-5 text-center ">                        
                         <img src="images/RT942.png" alt="" style="width:100%">
                     </div>
-                    <div class="col-lg-6 col-md-12 ml-auto mr-auto text-center">                        
+                    <div class="col-lg-6 col-md-12 mb-5 text-center ">                        
                         <img src="images/RT943.png" alt="" style="width:100%">
                     </div>
-                    <div class="col-lg-6 col-md-12 ml-auto mr-auto text-center">                        
+                    <div class="col-lg-6 col-md-12 mb-5 text-center ">                        
                         <img src="images/RT955.png" alt="" style="width:100%">
                     </div>
-                    <div class="col-lg-6 col-md-12 ml-auto mr-auto text-center">                        
+                    <div class="col-lg-6 col-md-12 mb-5 text-center ">                        
                         <img src="images/RT956.png" alt="" style="width:100%">
                     </div>
-                    <div class="col-lg-6 col-md-12 ml-auto mr-auto text-center">                        
+                    <div class="col-lg-6 col-md-12 mb-5 text-center ">                        
                         <img src="images/RT959.png" alt="" style="width:100%">
                     </div>
-                    <div class="col-lg-6 col-md-12 ml-auto mr-auto text-center">                        
+                    <div class="col-lg-6 col-md-12 mb-5 text-center ">                        
                         <img src="images/RT960.png" alt="" style="width:100%">
                     </div>
-                    <div class="col-lg-6 col-md-12 ml-auto mr-auto text-center">                        
+                    <div class="col-lg-6 col-md-12 mb-5 text-center ">                        
                         <img src="images/RT961.png" alt="" style="width:100%">
                     </div>
-                    <div class="col-lg-6 col-md-12 ml-auto mr-auto text-center">                        
+                    <div class="col-lg-6 col-md-12 mb-5 text-center ">                        
                         <img src="images/RT962.png" alt="" style="width:100%">
                     </div>
-                    <div class="col-lg-6 col-md-12 ml-auto mr-auto text-center">                        
+                    <div class="col-lg-6 col-md-12 mb-5 text-center ">                        
                         <img src="images/RT965.png" alt="" style="width:100%">
                     </div>
-                    <div class="col-lg-6 col-md-12 ml-auto mr-auto text-center">                        
+                    <div class="col-lg-6 col-md-12 mb-5 text-center ">                        
                         <img src="images/RT967.png" alt="" style="width:100%">
                     </div>
-                    <div class="col-lg-6 col-md-12 ml-auto mr-auto text-center">                        
+                    <div class="col-lg-6 col-md-12 mb-5 text-center ">                        
                         <img src="images/RT968.png" alt="" style="width:100%">
                     </div>
                 </div>
@@ -122,6 +126,49 @@
                 </div>
             </footer>
         </div>
+        <script>        
+            function myMap() {
+                var mapCanvas = document.getElementById("map");
+                var myCenter = new google.maps.LatLng(23.522428, 120.944641); 
+                var mapOptions = {center: myCenter, zoom: 8};
+                var map = new google.maps.Map(mapCanvas,mapOptions);
+
+                var locations = [
+                    ['Chung Cheng', 23.56621667,120.47887833],
+                    ['Dang Hwa', 23.89745000,121.55080667],
+                    ['Tatung', 22.73974333,121.06491836],
+                    ['Hengshan 2',24.71173333,121.14090667],
+                    ['Nan Ao',24.44875500,121.78743000],
+                    ['Feng Bin',23.46745000,121.49629667],
+                    ['ShLin',24.12476833,121.65518667],
+                    ['Ken Ding',21.91336500,120.84885500]
+                ];          
+                
+                var infowindow = new google.maps.InfoWindow();
+
+                var marker, i;
+
+                for (i = 0; i < locations.length; i++) {  
+                    marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                        map: map
+                    });
+                    
+                    var infowindow = new google.maps.InfoWindow();
+                    infowindow.setContent(locations[i][0]);
+                    infowindow.open(map, marker);
+                }
+                
+                // Zoom to 9 when clicking on marker
+                google.maps.event.addListener(marker,'click',function() {
+                    map.setZoom(12);
+                    map.setCenter(marker.getPosition());
+                });            
+                marker.setMap(map);
+            }
+        </script>                    
+        <script src="https://maps.googleapis.com/maps/api/js?callback=myMap"></script>        
+        
         <script type="text/javascript" src="js/main.js"></script>
     </body>
 </html>
